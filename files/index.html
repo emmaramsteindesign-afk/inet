@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jeux territoriaux</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="top-navbar">
+  <!-- LOGO INET unifié avec hover expansion -->
+  <a class="nav-brand" href="../index.html">
+    <img src="../logo.svg" alt="INET" class="nav-logo-img">
+    <span class="nav-inet-label">
+      <span class="inet-word"><span class="inet-letter">i</span><span class="inet-rest" style="--d:0">nstitut</span></span>
+      <span class="inet-sep" style="--d:1">·</span>
+      <span class="inet-word"><span class="inet-letter">n</span><span class="inet-rest" style="--d:2">ational</span></span>
+      <span class="inet-sep" style="--d:3">·</span>
+      <span class="inet-word"><span class="inet-letter">e</span><span class="inet-rest" style="--d:4">tudes</span></span>
+      <span class="inet-sep" style="--d:5">·</span>
+      <span class="inet-word"><span class="inet-letter">t</span><span class="inet-rest" style="--d:6">erritoriales</span></span>
+    </span>
+  </a>
+
+  <!-- STATS DE JEU — centre -->
+  <div class="nav-stats">
+    <span class="nav-stat-item">
+      <span class="nav-stat-label">Case</span>
+      <strong id="stat-pos">1</strong>
+      <span class="nav-stat-label">/ 16</span>
+    </span>
+    <span class="nav-divider"></span>
+    <span class="nav-stat-item">
+      <span class="nav-stat-label">Score</span>
+      <strong id="stat-score">0</strong>
+      <span class="nav-stat-label">pts</span>
+    </span>
+    <span class="nav-divider"></span>
+    <span class="nav-stat-item">
+      <span class="nav-stat-label">Dé</span>
+      <strong id="stat-dice">—</strong>
+    </span>
+  </div>
+
+  <!-- BOUTONS NAVIGATION -->
+  <div class="nav-actions">
+    <button class="nav-help-btn" onclick="openTutorial()" title="Consignes du jeu">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      Consignes
+    </button>
+    <a href="../index.html" class="nav-btn-outline">Se former</a>
+    <a href="#" class="nav-btn-filled">En(jeux) territoriaux</a>
+  </div>
+</nav>
+
+<!-- MODAL CONSIGNES -->
+<div id="tutorial-overlay" onclick="if(event.target===this)closeTutorial()">
+  <div id="tutorial-modal">
+    <div class="tuto-header">
+      <div class="tuto-logo">
+      </div>
+      <div>
+        <div class="tuto-tag">En(jeux) territoriaux</div>
+        <h2 class="tuto-title">Comment jouer ?</h2>
+      </div>
+      <button class="tuto-close" onclick="closeTutorial()">✕</button>
+    </div>
+
+    <div class="tuto-body">
+
+      <div class="tuto-step">
+        <div class="tuto-step-num">01</div>
+        <div class="tuto-step-content">
+          <h4>Lancez le dé</h4>
+          <p>Cliquez sur <strong>"Lancer le dé"</strong> en bas de l'écran. Votre pion avance automatiquement du nombre de cases indiqué, case par case.</p>
+        </div>
+      </div>
+
+      <div class="tuto-step">
+        <div class="tuto-step-num">02</div>
+        <div class="tuto-step-content">
+          <h4>Prenez une décision</h4>
+          <p>En atterrissant sur certaines cases, un <strong>scénario territorial</strong> s'ouvre : situation réelle, question, 3 options. Choisissez la meilleure stratégie de cadre territorial.</p>
+        </div>
+      </div>
+
+      <div class="tuto-step">
+        <div class="tuto-step-num">03</div>
+        <div class="tuto-step-content">
+          <h4>Gagnez des points</h4>
+          <p>Bonne décision = <strong>+10 points</strong>. Mauvaise décision = pénalité possible (recul de cases ou tour passé). La barre de progression en haut reflète votre avancement.</p>
+        </div>
+      </div>
+
+      <div class="tuto-step">
+        <div class="tuto-step-num">04</div>
+        <div class="tuto-step-content">
+          <h4>Naviguez sur la carte</h4>
+          <p>Faites glisser la carte pour l'explorer. Utilisez la <strong>molette</strong> pour zoomer. Survolez une case pour voir son nom.</p>
+        </div>
+      </div>
+
+      <div class="tuto-step">
+        <div class="tuto-step-num">05</div>
+        <div class="tuto-step-content">
+          <h4>Atteignez la case finale</h4>
+          <p>Parcourez les <strong>16 cases</strong> du plateau pour terminer votre mission territoriale à Strasbourg. Votre score final reflète la qualité de vos décisions.</p>
+        </div>
+      </div>
+
+      <div class="tuto-tip">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        <span>Conseil : répondez avant de relancer le dé — vous ne pouvez pas jouer tant qu'une question est ouverte.</span>
+      </div>
+
+    </div>
+
+    <div class="tuto-footer">
+      <button class="tuto-btn-start" onclick="closeTutorial()">C'est parti !</button>
+    </div>
+  </div>
+</div>
+
+<div id="progbar"><div id="progfill"></div></div>
+
+<div id="map-wrap"><div id="map-canvas"></div></div>
+
+<div id="dice-display"></div>
+<button id="dice-btn" onclick="rollDice()">Lancer le dé</button>
+
+<div id="panel">
+  <div class="panel-step" id="p-step"></div>
+  <div class="panel-loc"  id="p-loc"></div>
+  <div class="panel-title" id="p-title"></div>
+  <span class="panel-module" id="p-module"></span>
+  <div class="panel-situation" id="p-situation"></div>
+  <div class="panel-question" id="p-question"></div>
+  <div class="choices" id="p-choices"></div>
+  <div class="feedback-box" id="p-feedback"></div>
+  <div class="penalty-note" id="p-penalty"></div>
+  <div class="panel-footer">
+    <button class="btn-close" onclick="closePanel()">Carte</button>
+    <button class="btn-next" id="btn-next" onclick="closePanel()">Continuer</button>
+  </div>
+</div>
+
+<div id="win">
+  <svg width="52" height="60" viewBox="0 0 540 624" fill="none">
+    <rect width="311.766" height="311.766" transform="matrix(-4.37114e-08 -1 0.865988 -0.500065 270.021 623.545)" fill="#D9A7EB"/>
+    <path d="M35.7609 176.516L19.7065 167.247L289.707 11.3627L305.761 20.6317L35.7609 176.516Z" fill="#FF5D6B"/>
+    <path d="M250.301 300.381L234.247 291.112L504.247 135.227L520.3 144.496L250.301 300.381Z" fill="#FF5D6B"/>
+    <rect width="311.766" height="311.766" transform="matrix(0.866044 -0.499967 0.866044 0.499967 6.10352e-05 467.672)" fill="#D9A7EB"/>
+  </svg>
+  <h2>Strasbourg maîtrisée !</h2>
+  <div class="win-score" id="win-score-val"></div>
+  <p>Tu as parcouru les 12 cases du parcours INET et résolu chaque décision territoriale.</p>
+  <button id="win-restart" onclick="location.reload()">Rejouer</button>
+</div>
+
+<div id="toast"></div>
+
+<script src="data.js"></script>
+<script src="map.js"></script>
+<script src="game.js"></script>
+<script>
+function openTutorial() {
+  document.getElementById('tutorial-overlay').classList.add('show');
+}
+function closeTutorial() {
+  document.getElementById('tutorial-overlay').classList.remove('show');
+}
+// Auto-affichage au premier chargement
+window.addEventListener('load', () => {
+  setTimeout(openTutorial, 400);
+});
+</script>
+</body>
+</html>
