@@ -22,7 +22,7 @@ function makePlatformSVG(topColor, stepLabel, icon, isCurrent, isFinal, isVisite
     const fs = n.length > 1 ? 10 : 12;
     numSVG = `<g transform="translate(${hw},${TH/2})">
       <text transform="matrix(0.82,-0.24,0.41,0.52,0,0)" x="0" y="${fs*0.38}"
-        text-anchor="middle" font-family="'DM Mono',monospace" font-weight="700"
+        text-anchor="middle" font-family="'TT Commons',sans-serif" font-weight="700"
         font-size="${fs}" fill="rgba(255,255,255,0.82)" style="pointer-events:none">${n}</text>
     </g>`;
   }
@@ -332,7 +332,7 @@ function createPionSVG() {
     defs.appendChild(cp);
   });
 
-  // Motion blur filter — stdDeviation mis à jour à chaque frame
+  // Motion blur filter , stdDeviation mis à jour à chaque frame
   const filter = document.createElementNS(NS, 'filter');
   filter.setAttribute('id', 'motion-blur');
   filter.setAttribute('x', '-30%'); filter.setAttribute('y', '-30%');
@@ -411,15 +411,15 @@ function updatePionSVG(svg, corners, blurX = 0, blurY = 0) {
   const faceFront = [p[3], p[7], p[6], p[2]];
   const faceRight = [p[1], p[5], p[6], p[2]];
 
-  // right — violet uni
+  // right , violet uni
   svg.getElementById('face_right').setAttribute('points', ptsStr(faceRight));
 
-  // front — violet dark + rayures verticales (interpoler tl→bl)
+  // front , violet dark + rayures verticales (interpoler tl→bl)
   svg.getElementById('face_front').setAttribute('points', ptsStr(faceFront));
   svg.getElementById('stripes_front').innerHTML =
     buildFaceStripes(faceFront[0], faceFront[3], faceFront[2], faceFront[1], 8, STRIPE_COL);
 
-  // top — violet clair + rayures
+  // top , violet clair + rayures
   svg.getElementById('face_top').setAttribute('points', ptsStr(faceTop));
   svg.getElementById('stripes_top').innerHTML =
     buildFaceStripes(faceTop[0], faceTop[1], faceTop[2], faceTop[3], 8, STRIPE_COL);

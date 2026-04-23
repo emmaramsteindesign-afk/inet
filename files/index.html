@@ -4,15 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jeux territoriaux</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<nav class="top-navbar">
+<nav class="top-navbar navbar  px-4 sticky-top custom-nav">
   <!-- LOGO INET unifié avec hover expansion -->
-  <a class="nav-brand" href="../index.html">
-    <img src="../logo.svg" alt="INET" class="nav-logo-img">
+  <a class="navbar-brand d-flex align-items-center gap-3" href="../index.html">
+    <img src="../logo.svg" alt="inet" class="nav-logo-img">
     <span class="nav-inet-label">
       <span class="inet-word"><span class="inet-letter">i</span><span class="inet-rest" style="--d:0">nstitut</span></span>
       <span class="inet-sep" style="--d:1">·</span>
@@ -24,7 +28,7 @@
     </span>
   </a>
 
-  <!-- STATS DE JEU — centre -->
+  <!-- STATS DE JEU, centre -->
   <div class="nav-stats">
     <span class="nav-stat-item">
       <span class="nav-stat-label">Case</span>
@@ -40,7 +44,7 @@
     <span class="nav-divider"></span>
     <span class="nav-stat-item">
       <span class="nav-stat-label">Dé</span>
-      <strong id="stat-dice">—</strong>
+      <strong id="stat-dice">,</strong>
     </span>
   </div>
 
@@ -50,9 +54,7 @@
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
       Consignes
     </button>
-    <a href="../index.html" class="nav-btn-outline">Se former</a>
-    <a href="#" class="nav-btn-filled">En(jeux) territoriaux</a>
-  </div>
+
 </nav>
 
 <!-- MODAL CONSIGNES -->
@@ -112,7 +114,7 @@
 
       <div class="tuto-tip">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-        <span>Conseil : répondez avant de relancer le dé — vous ne pouvez pas jouer tant qu'une question est ouverte.</span>
+        <span>Conseil : répondez avant de relancer le dé, vous ne pouvez pas jouer tant qu'une question est ouverte.</span>
       </div>
 
     </div>
@@ -131,6 +133,10 @@
 <button id="dice-btn" onclick="rollDice()">Lancer le dé</button>
 
 <div id="panel">
+  <div class="panel-formation-header" id="p-formation-header">
+    <img id="p-illu" src="" alt="" style="display:none;">
+    <span class="tilt-tag" id="p-formation-label"></span>
+  </div>
   <div class="panel-step" id="p-step"></div>
   <div class="panel-loc"  id="p-loc"></div>
   <div class="panel-title" id="p-title"></div>
@@ -147,16 +153,11 @@
 </div>
 
 <div id="win">
-  <svg width="52" height="60" viewBox="0 0 540 624" fill="none">
-    <rect width="311.766" height="311.766" transform="matrix(-4.37114e-08 -1 0.865988 -0.500065 270.021 623.545)" fill="#D9A7EB"/>
-    <path d="M35.7609 176.516L19.7065 167.247L289.707 11.3627L305.761 20.6317L35.7609 176.516Z" fill="#FF5D6B"/>
-    <path d="M250.301 300.381L234.247 291.112L504.247 135.227L520.3 144.496L250.301 300.381Z" fill="#FF5D6B"/>
-    <rect width="311.766" height="311.766" transform="matrix(0.866044 -0.499967 0.866044 0.499967 6.10352e-05 467.672)" fill="#D9A7EB"/>
-  </svg>
-  <h2>Strasbourg maîtrisée !</h2>
+
+  <h2>Parcours accompli !</h2>
   <div class="win-score" id="win-score-val"></div>
-  <p>Tu as parcouru les 12 cases du parcours INET et résolu chaque décision territoriale.</p>
-  <button id="win-restart" onclick="location.reload()">Rejouer</button>
+  <p>Vous avez traversé les 16 étapes du parcours territorial de l'INET et pris des décisions à chaque carrefour. Chaque bonne réponse, c'est un réflexe de cadre territorial de plus.</p>
+  <button id="win-restart" onclick="location.reload()">Rejouer le parcours</button>
 </div>
 
 <div id="toast"></div>

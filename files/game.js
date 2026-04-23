@@ -25,7 +25,7 @@ function rollDice() {
   if (skipNextTurn) {
     skipNextTurn = false;
     document.getElementById('stat-dice').textContent = 'Passer';
-    showToast('Tour passé — pénalité de la case précédente');
+    showToast('Tour passé, pénalité de la case précédente');
     setTimeout(() => { diceBtn.disabled = false; }, 1000);
     return;
   }
@@ -38,21 +38,15 @@ function rollDice() {
   diceDisp.classList.add('show');
   setTimeout(() => diceDisp.classList.remove('show'), 1500);
  
-  showToast(`${roll} — Avancer de ${roll} case${roll > 1 ? 's' : ''}`);
+  showToast(`${roll} , Avancer de ${roll} case${roll > 1 ? 's' : ''}`);
  
   isMoving = true;
   let movesLeft = roll;
  
   function stepMove() {
-    if (movesLeft <= 0 || currentStep >= PATH.length - 1) {
+    if (currentStep >= PATH.length - 1) {
       isMoving = false;
-      if (currentStep >= PATH.length - 1) {
-        setTimeout(showWin, 700);
-      } else {
-        const dec = DECISIONS.find(d => d.stepIdx === currentStep);
-        if (dec && !answeredDecisions.has(dec.stepIdx)) setTimeout(() => openDecision(dec), 500);
-        else diceBtn.disabled = false;
-      }
+      setTimeout(showWin, 700);
       return;
     }
     const from  = currentStep;
@@ -62,7 +56,18 @@ function rollDice() {
     refreshAllTiles();
     animateHop(from, currentStep, () => {
       movesLeft--;
-      stepMove();
+      if (movesLeft <= 0 || currentStep >= PATH.length - 1) {
+        isMoving = false;
+        if (currentStep >= PATH.length - 1) {
+          setTimeout(showWin, 700);
+        } else {
+          const dec = DECISIONS.find(d => d.stepIdx === currentStep);
+          if (dec && !answeredDecisions.has(dec.stepIdx)) setTimeout(() => openDecision(dec), 500);
+          else diceBtn.disabled = false;
+        }
+      } else {
+        stepMove();
+      }
     });
   }
   stepMove();
@@ -73,6 +78,43 @@ function openDecision(d) {
   currentDecision = d;
   awaitingAnswer  = true;
  
+  // Illustration et label de formation
+  const illuEl   = document.getElementById('p-illu');
+  const headerEl = document.getElementById('p-formation-header');
+  const labelEl  = document.getElementById('p-formation-label');
+  const fi       = d.formation;
+  if (fi) {
+    if (illuEl)  { illuEl.src = fi.illu; illuEl.style.display = 'block'; }
+    if (labelEl) {
+      labelEl.textContent = fi.label;
+      const tagClass =
+        fi.label === 'Administrateur territorial'  ? 'tilt-tag-administrateur' :
+        fi.label === 'Conservateur du patrimoine'  ? 'tilt-tag-patrimoine' :
+        fi.label === 'Conservateur de bibliothèques' ? 'tilt-tag-bibli' : '';
+      labelEl.className = 'tilt-tag ' + tagClass;
+    }
+    if (headerEl) {
+      headerEl.style.display = 'flex';
+      // Light background tint per formation theme
+      const bgMap = {
+        'Administrateur territorial':    'rgba(192,225,215,0.12)',
+        'Conservateur du patrimoine':    'rgba(238,229,243,0.12)',
+        'Conservateur de bibliothèques': 'rgba(252,230,232,0.12)',
+      };
+      const borderMap = {
+        'Administrateur territorial':    '#68C0B5',
+        'Conservateur du patrimoine':    '#B488BC',
+        'Conservateur de bibliothèques': '#ED6971',
+      };
+      headerEl.style.background   = bgMap[fi.label]    || 'rgba(255,255,255,.04)';
+      headerEl.style.borderColor  = borderMap[fi.label] || 'rgba(255,255,255,.08)';
+    }
+  } else {
+    if (illuEl)   illuEl.style.display = 'none';
+    if (labelEl)  labelEl.textContent = '';
+    if (headerEl) headerEl.style.display = 'none';
+  }
+
   document.getElementById('p-step').textContent = `Case ${d.stepIdx + 1} / ${PATH.length}`;
   document.getElementById('p-loc').textContent  = d.lieu;
   document.getElementById('p-title').textContent = `  ${d.name}`;

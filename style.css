@@ -11,6 +11,7 @@
   --black: #111111;
   --gray: #666;
   --light-gray: #f5f5f5;
+  --green: #00A499;
 }
 
 /* =========================
@@ -349,7 +350,7 @@ footer a {
 }
 
 .i3 {
-  font-weight: 900;
+  font-weight: 800;
   animation-delay: 0.5s;
 }
 
@@ -591,7 +592,7 @@ footer a {
     width: 30px;
     height: 36px;
     opacity: 1;
-    background: url("data:image/svg+xml;utf8,<svg viewBox='0 0 15 18' xmlns='http://www.w3.org/2000/svg'><path d='M4.96284 0L14.9632 0L10.0185 9.01357L15 17.9997L4.96433 18L0 8.96631L4.96284 0Z' fill='black'/></svg>") no-repeat center;
+    background: url("data:image/svg+xml;utf8,<svg viewBox='0 0 15 18' xmlns='http://www.w3.org/2000/svg'><path d='M4.96284 0L14.9632 0L10.0185 9.01357L15 17.9997L4.96433 18L0 8.96631L4.96284 0Z' fill='purple'/></svg>") no-repeat center;
     background-size: contain;
 }
 
@@ -611,7 +612,7 @@ footer a {
     width: 30px;
     height: 36px;
     transform: rotate(180deg);
-    background: url("data:image/svg+xml;utf8,<svg viewBox='0 0 15 18' xmlns='http://www.w3.org/2000/svg'><path d='M4.96284 0L14.9632 0L10.0185 9.01357L15 17.9997L4.96433 18L0 8.96631L4.96284 0Z' fill='black'/></svg>") no-repeat center;
+    background: url("data:image/svg+xml;utf8,<svg viewBox='0 0 15 18' xmlns='http://www.w3.org/2000/svg'><path d='M4.96284 0L14.9632 0L10.0185 9.01357L15 17.9997L4.96433 18L0 8.96631L4.96284 0Z' fill='purple'/></svg>") no-repeat center;
     background-size: contain;
 }
 
@@ -622,6 +623,10 @@ footer a {
     justify-content: flex-end; /* 👈 clé */
     gap: 15px;
     text-align: right; /* texte aligné à droite */
+}
+
+.testimonial-author strong {
+    color: var(--black) !important;
 }
 
 .testimonial-block {
@@ -825,4 +830,961 @@ h5, .date-title {
 /* état scroll */
 .bold-word.is-inview {
   font-weight: 00;
+}
+
+/* =========================
+   TESTIMONIALS COLORÉS
+========================= */
+
+/* Chevrons à opacité réduite */
+.quote-left span,
+.quote-right span {
+    opacity: 0.2 !important;
+}
+
+/* strong dans testimonial coloré */
+.testimonial[style*="--quote-color: var(--purple)"] h4 strong { color: var(--purple); }
+.testimonial[style*="--quote-color: var(--red)"] h4 strong { color: var(--red); }
+.testimonial[style*="--quote-color: #00a499"] h4 strong { color: #00a499; }
+
+/* =========================
+   BTN-MORE sur fond rouge
+========================= */
+.section-red .btn-more {
+    background: rgba(255,255,255,0.15) !important;
+    color: white !important;
+    border: 1px solid rgba(255,255,255,0.3) !important;
+}
+.section-red .btn-more:hover {
+    background: rgba(255,255,255,0.25) !important;
+}
+.section-red .btn-add {
+    background: white !important;
+    color: var(--red) !important;
+}
+.section-red .btn-add:hover {
+    background: rgba(255,255,255,0.9) !important;
+}
+
+/* Date labels on red */
+.section-red .date-label { color: rgba(255,255,255,0.6) !important; }
+.section-red .date-title { color: white !important; }
+.section-red .date-desc  { color: rgba(255,255,255,0.8) !important; }
+.section-red .date-chevron { filter: brightness(0) invert(1); opacity:0.5; }
+
+/* =========================
+   FORMATIONS-SECTION on red — override hover
+========================= */
+.formations-section.section-red .formation-item {
+    border-top-color: rgba(255,255,255,0.18);
+    border-bottom-color: rgba(255,255,255,0.18);
+}
+.formations-section.section-red .formation-item:hover {
+    background: rgba(255,255,255,0.05);
+}
+
+/* =========================
+   NO FULL CAPS override
+========================= */
+.nav-help-btn,
+.nav-btn-outline,
+.nav-btn-filled,
+.hero-tag,
+.formation-tag,
+.metier-tag,
+.tilt-label,
+.tilt-label-red,
+.tilt-label-purple {
+    text-transform: none !important;
+    letter-spacing: 0.04em !important;
+}
+
+/* =========================
+   FORMATIONS INITIALES — 3 CARTES
+========================= */
+
+.formation-initiale-card {
+    border: 1px solid #eee;
+    padding: 36px 28px 28px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.formation-initiale-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.07);
+}
+
+.fi-illu-wrap {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4px;
+}
+
+.fi-illu {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+}
+
+.fi-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    padding: 3px 10px;
+    width: fit-content;
+}
+
+.fi-tag-purple {
+    background: rgba(168,85,247,0.1);
+    color: var(--purple);
+}
+
+.fi-tag-red {
+    background: rgba(239,68,68,0.1);
+    color: var(--red);
+}
+
+.fi-tag-green {
+    background: #c8f5e0;
+    color: #1a7a50;
+}
+
+.fi-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--black);
+    margin: 0;
+}
+
+.fi-desc {
+    font-size: 0.88rem;
+    color: var(--gray);
+    line-height: 1.7;
+    margin: 0;
+    flex: 1;
+}
+
+.fi-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid #eee;
+    padding-top: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.fi-list li {
+    font-size: 0.8rem;
+    color: var(--gray);
+    padding-left: 14px;
+    position: relative;
+}
+
+.fi-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 5px;
+    background: var(--purple);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+   .nav-inet-label {
+            display: inline-flex;
+            align-items: baseline;
+            font-family: 'TT Commons', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--red);
+            letter-spacing: 0;
+            line-height: 1;
+            cursor: default;
+            overflow: hidden;
+        }
+
+        /* Chaque groupe = lettre acronyme + reste du mot qui se déplie */
+        .inet-word {
+            display: inline-flex;
+            align-items: baseline;
+            white-space: nowrap;
+        }
+
+        /* La lettre acronyme — toujours visible */
+        .inet-letter {
+            display: inline-block;
+            transition: letter-spacing 0.4s cubic-bezier(0.4,0,0.2,1);
+        }
+
+        /* Le reste du mot — caché par défaut (width:0, overflow:hidden) */
+        .inet-rest {
+            display: inline-block;
+            max-width: 0;
+            overflow: hidden;
+            opacity: 0;
+            font-weight: 400;
+            font-size: 0.72rem;
+            letter-spacing: 0.3px;
+            vertical-align: baseline;
+            white-space: nowrap;
+            transition:
+                max-width 0.45s cubic-bezier(0.4,0,0.2,1),
+                opacity   0.35s ease,
+                margin    0.45s cubic-bezier(0.4,0,0.2,1);
+            transition-delay: calc(var(--d) * 0.07s);
+            margin-left: 0;
+        }
+
+        /* Séparateur entre les mots */
+        .inet-sep {
+            display: inline-block;
+            width: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: width 0.3s ease, opacity 0.3s ease;
+            transition-delay: calc(var(--d) * 0.07s);
+            color: rgba(239,68,68,0.4);
+            font-weight: 300;
+            font-size: 0.9rem;
+        }
+
+        /* HOVER — tout s'ouvre */
+        .nav-inet-label:hover .inet-rest {
+            max-width: 160px;
+            opacity: 1;
+            margin-left: 2px;
+        }
+
+        .nav-inet-label:hover .inet-sep {
+            width: 10px;
+            opacity: 1;
+        }
+        /* =====================
+           NAV INET HOVER EFFECT — lettres qui s'écartent
+        ===================== */
+     
+        /* =====================
+           ANIMATIONS GLOBALES
+        ===================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* =====================
+           HERO
+        ===================== */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 80px 0;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(168,85,247,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            background: var(--light-gray);
+            color: var(--gray);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            padding: 6px 14px;
+            margin-bottom: 24px;
+        }
+
+        .hero-stat {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .hero-stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--purple);
+            line-height: 1;
+        }
+
+        .hero-stat-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+            letter-spacing: 0.5px;
+        }
+
+        .hero-stats-row {
+            display: flex;
+            gap: 40px;
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid #eee;
+        }
+
+
+
+        /* =====================
+           CHIFFRES CLÉS
+        ===================== */
+        .counter-value {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--purple);
+            line-height: 1;
+        }
+
+        .section-pink {
+            background: var(--white);
+            padding: 80px 0;
+        }
+
+        @media (min-width: 1024px) {
+            .section-pink {
+                padding: 120px 8%;
+            }
+        }
+
+        /* =====================
+           SECTION GAME
+        ===================== */
+        .section-game {
+            background: var(--black);
+            color: white;
+            padding: 80px 0;
+        }
+
+        .section-game h2, .section-game p {
+            color: white;
+        }
+
+        /* ── ISO PREVIEW ── */
+        .game-iso-preview {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 0;
+        }
+        #isoPreview {
+            position: relative;
+        }
+
+        @media (min-width: 1024px) {
+            .section-game {
+                padding: 120px 8%;
+            }
+        }
+
+        /* =====================
+           SECTION INSTAGRAM
+        ===================== */
+        .section-instagram {
+            padding: 80px 0;
+        }
+
+        @media (min-width: 1024px) {
+            .section-instagram {
+                padding: 80px 8%;
+            }
+        }
+
+        /* =====================
+           CHIFFRES CLÉS SECTION
+        ===================== */
+        .stats-section {
+            background: var(--light-gray);
+            padding: 80px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .stat-unit {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--purple);
+        }
+
+        @media (min-width: 1024px) {
+            .stats-section {
+                padding: 80px 8%;
+            }
+        }
+
+        /* =====================
+           ACCENT LINE
+        ===================== */
+        .accent-line {
+            display: inline-block;
+            width: 40px;
+            height: 3px;
+            background: var(--red);
+            margin-bottom: 16px;
+        }
+
+        /* =====================
+           HOVER CARDS
+        ===================== */
+        .access-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: default;
+        }
+        .access-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08) !important;
+        }
+
+        /* =====================
+           FAQ TWEAKS
+        ===================== */
+        .section-red .faq-section {
+            background: transparent;
+        }
+
+        /* =====================
+           PROGRESS BAR animée
+        ===================== */
+        .skill-bar-wrap {
+            margin-bottom: 16px;
+        }
+        .skill-bar-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            margin-bottom: 5px;
+            color: var(--gray);
+        }
+        .skill-bar-track {
+            height: 4px;
+            background: #eee;
+            width: 100%;
+        }
+        .skill-bar-fill {
+            height: 4px;
+            background: var(--purple);
+            width: 0%;
+            transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+        }
+
+        /* =====================
+           SECTION FORMATIONS
+        ===================== */
+        .formations-section {
+            background: white;
+            padding: 80px 0;
+        }
+
+        .formation-item {
+            border-top: 1px solid #eee;
+            padding: 28px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            transition: background 0.2s;
+            cursor: pointer;
+        }
+
+        .formation-item:last-child {
+            border-bottom: 1px solid #eee;
+        }
+
+        .formation-tag {
+            font-size: 0.7rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--purple);
+            background: rgba(168,85,247,0.08);
+            padding: 3px 10px;
+        }
+
+        .formation-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            color: var(--purple);
+            border: 1px solid rgba(168,85,247,0.3);
+            border-radius: 50%;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        @media (min-width: 1024px) {
+            .formations-section {
+                padding: 120px 8%;
+            }
+        }
+
+        /* =====================
+           TEXTES PENCHÉS / SURLIGNÉS — style éditorial
+        ===================== */
+        .tilt-tag {
+            display: inline-block;
+            font-family: 'TT Commons', sans-serif;
+            font-weight: 600;
+            padding: 5px 14px;
+            line-height: 1.4;
+        }
+        .tilt-tag-purple {
+            background: rgba(168,85,247,0.13);
+            color: var(--purple);
+            transform: rotate(-2deg);
+        }
+        .tilt-tag-red {
+            background: rgba(239,68,68,0.13);
+            color: var(--red);
+            transform: rotate(1.5deg);
+        }
+        .tilt-tag-green {
+            background: #c8f5e0;
+            color: #1a7a50;
+            transform: rotate(-1.2deg);
+        }
+        .tilt-tag-white {
+            background: white;
+            color: var(--purple);
+            transform: rotate(2deg);
+        }
+        .tilt-tag-patrimoine {
+            display: inline-block;
+        }
+        .tilt-label {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            padding: 4px 10px;
+        }
+        .tilt-label-red   { background: var(--red);    color: white; transform: rotate(-2.5deg); }
+        .tilt-label-purple{ background: var(--purple); color: white; transform: rotate(2deg); }
+        .tilt-label-red, .tilt-label-purple { text-transform: none; }
+
+        /* =====================
+           BOLD WORD — scroll fix
+           (override style.css, ensure transition visible)
+        ===================== */
+        .bold-word {
+            display: inline-block;
+            font-weight: 400 !important;
+            transition: font-weight 0.7s ease !important;
+        }
+        .bold-word.is-inview {
+            font-weight: 700 !important;
+        }
+
+        /* =====================
+           MÉTIERS CAROUSEL
+        ===================== */
+        .metiers-track {
+            display: flex;
+            gap: 24px;
+            padding: 20px 8% 20px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .metiers-track::-webkit-scrollbar { display: none; }
+
+        .metier-card {
+            flex: 0 0 400px;
+            min-width: 0;
+        }
+
+        .metier-card-inner {
+            border: 1px solid #eee;
+            background: white;
+            padding: 40px;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .metier-card-inner:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+        }
+
+        .metier-badge-icon {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+            margin-right: 10px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        /* HEX cluster — INET brand graphic language */
+        .metier-hex-cluster {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 28px;
+            width: 110px;
+            flex-wrap: wrap;
+        }
+
+        .hex {
+            width: 28px;
+            height: 34px;
+            clip-path: polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+        }
+
+        .hex-purple       { background: #a855f7; }
+        .hex-purple-light { background: rgba(168,85,247,0.35); }
+        .hex-red          { background: #ef4444; }
+        .hex-red-light    { background: rgba(239,68,68,0.35); }
+        .hex-stripe {
+            background: repeating-linear-gradient(90deg,#ef4444 0,#ef4444 3px,transparent 3px,transparent 7px);
+        }
+        .hex-stripe-purple {
+            background: repeating-linear-gradient(90deg,#a855f7 0,#a855f7 3px,transparent 3px,transparent 7px);
+        }
+
+        .metier-tag {
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            color: #a855f7;
+            background: rgba(168,85,247,0.08);
+            padding: 4px 10px;
+            display: inline-block;
+            margin-bottom: 14px;
+        }
+
+        .metier-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 14px;
+            color: #111;
+        }
+
+        .metier-desc {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.65;
+            margin-bottom: 20px;
+        }
+
+        .metier-stats {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            padding-top: 16px;
+            border-top: 1px solid #f0f0f0;
+            font-size: 0.8rem;
+        }
+        .metier-stat { color: #111; }
+        .metier-sep  { color: #ccc; }
+
+        .metiers-controls {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 32px;
+        }
+
+        .metier-prev, .metier-next {
+            width: 44px;
+            height: 44px;
+            border: 2px solid #a855f7;
+            background: transparent;
+            color: #a855f7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+            border-radius: 0;
+        }
+
+        .metier-prev:hover, .metier-next:hover {
+            background: #a855f7;
+            color: white;
+        }
+
+        .metier-dots { display: flex; gap: 8px; }
+
+        .metier-dot {
+            width: 8px;
+            height: 8px;
+            background: #ddd;
+            cursor: pointer;
+            transition: background 0.25s;
+            border: none;
+            border-radius: 0;
+        }
+
+        .metier-dot.active { background: #a855f7; }
+
+        @media (max-width: 768px) {
+            .metier-card { flex: 0 0 85vw; }
+        }
+
+/* =========================
+   CORRECTIONS PROPRES
+========================= */
+
+/* Marges uniformes pour toutes les sections */
+.section,
+.section-light,
+.section-game,
+.section-red,
+.section-purple,
+.formations-section,
+.section-instagram,
+.footer {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.section > .container,
+.section-light > .container,
+.section-game > .container,
+.section-red > .container,
+.section-purple > .container,
+.formations-section > .container,
+.section-instagram > .container,
+.footer > .container {
+    padding-left: 5% !important;
+    padding-right: 5% !important;
+}
+
+/* SECTION "next-dates" sur fond blanc */
+.next-dates {
+    background: white !important;
+    color: var(--black) !important;
+}
+.next-dates h2,
+.next-dates h5,
+.next-dates p {
+    color: var(--black) !important;
+}
+.next-dates .date-label { color: var(--gray) !important; opacity:1 !important; }
+.next-dates .date-title { color: var(--black) !important; }
+.next-dates .date-desc  { color: var(--gray) !important; opacity:1 !important; }
+.next-dates .date-chevron { filter: none !important; opacity:0.4 !important; }
+
+/* btn-more sur fond blanc -> outline purple */
+.next-dates .btn-more {
+    background: transparent !important;
+    color: var(--purple) !important;
+    border: 2px solid var(--purple) !important;
+    padding: 10px 14px !important;
+}
+.next-dates .btn-more:hover {
+    background: var(--purple) !important;
+    color: white !important;
+}
+/* btn-add sur fond blanc -> rouge plein */
+.next-dates .btn-add {
+    background: var(--red) !important;
+    color: white !important;
+    border: none !important;
+}
+
+/* SECTION CARROUSEL MÉTIERS sur fond clair */
+.section-light {
+    background: #f8f7ff !important;
+}
+
+/* Formation continue items: chevron color */
+.formation-item svg {
+    transition: opacity 0.2s;
+}
+
+/* Métier icon wrap */
+.metier-icon-wrap svg {
+    display: block;
+}
+.tilt-tag-administrateur{
+  color:var(--green); transform: rotate(0deg)!important;
+  font-weight: 700;
+}
+
+.tilt-tag-patrimoine{
+  color:var(--purple); transform: rotate(0deg)!important;
+  font-weight: 700;
+}
+
+.tilt-tag-bibli{
+  color:var(--red); transform: rotate(0deg)!important;
+  font-weight: 700;
+}
+.metier_content{
+  margin-top: 20px !important;
+}
+
+.metier-card-inner {gap: 20px !important;
+}
+
+.newsletter-input{
+  width: 100% !important;
+}
+/* =========================
+   UNIFORMISATION GLOBALE
+   Espacement sections + boutons
+========================= */
+
+/* -- Variables d'espacement -- */
+:root {
+  --section-v: 100px;
+  --section-v-sm: 64px;
+  --btn-pad-v: 11px;
+  --btn-pad-h: 22px;
+  --btn-font: 0.9rem;
+  --btn-weight: 600;
+  --btn-transition: background 0.22s ease, color 0.22s ease, border-color 0.22s ease;
+}
+
+/* -- Padding uniforme de toutes les sections -- */
+.section,
+.section-light,
+.section-dark,
+.section-red,
+.section-purple,
+.section-pink,
+.section-game,
+.section-instagram,
+.formations-section,
+.next-dates,
+.stats-section {
+  padding-top: var(--section-v) !important;
+  padding-bottom: var(--section-v) !important;
+}
+
+@media (max-width: 768px) {
+  .section,
+  .section-light,
+  .section-dark,
+  .section-red,
+  .section-purple,
+  .section-pink,
+  .section-game,
+  .section-instagram,
+  .formations-section,
+  .next-dates,
+  .stats-section {
+    padding-top: var(--section-v-sm) !important;
+    padding-bottom: var(--section-v-sm) !important;
+  }
+}
+
+/* -- Base bouton uniforme -- */
+.btn-add,
+.btn-more,
+.btn-jeu,
+.btn-formation,
+.newsletter-btn {
+  padding: var(--btn-pad-v) var(--btn-pad-h) !important;
+  font-size: var(--btn-font) !important;
+  font-weight: var(--btn-weight) !important;
+  font-family: 'TT Commons', sans-serif !important;
+  border-radius: 0 !important;
+  display: inline-block !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  transition: var(--btn-transition) !important;
+  line-height: 1.4 !important;
+  letter-spacing: 0.02em !important;
+  border-width: 2px !important;
+  border-style: solid !important;
+}
+
+/* btn-add : rouge plein */
+.btn-add {
+  background: var(--red) !important;
+  color: white !important;
+  border-color: var(--red) !important;
+}
+.btn-add:hover {
+  background: #c0392b !important;
+  border-color: #c0392b !important;
+}
+
+/* btn-more : outline purple */
+.btn-more {
+  background: transparent !important;
+  color: var(--purple) !important;
+  border-color: var(--purple) !important;
+}
+.btn-more:hover {
+  background: var(--purple) !important;
+  color: white !important;
+}
+
+/* btn-more sur fond rouge */
+.section-red .btn-more {
+  background: transparent !important;
+  color: white !important;
+  border-color: rgba(255,255,255,0.55) !important;
+}
+.section-red .btn-more:hover {
+  background: rgba(255,255,255,0.15) !important;
+}
+
+/* btn-add sur fond rouge */
+.section-red .btn-add {
+  background: white !important;
+  color: var(--red) !important;
+  border-color: white !important;
+}
+.section-red .btn-add:hover {
+  background: rgba(255,255,255,0.88) !important;
+}
+
+/* -- FAQ section : pas de padding vertical propre, elle hérite de section-red -- */
+.faq-section {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* -- Gouttière entre témoignages et FAQ -- */
+.section-pink .row.g-5 {
+  --bs-gutter-x: 3.5rem;
+  --bs-gutter-y: 3rem;
+}
+
+/* -- testimonial-block spacing uniformisé -- */
+.testimonial-block {
+  margin-bottom: 60px !important;
+}
+.testimonial-block:last-child {
+  margin-bottom: 0 !important;
 }

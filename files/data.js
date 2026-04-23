@@ -11,200 +11,307 @@ function isoXY(col, row) {
 
 // ─── PATH ─────────────────────────────────────────────────────────────────────
 const PATH = [
-  { col:1, row:5 },  // 0  – decision
-  { col:2, row:5 },  // 1  – intermed
-  { col:2, row:4 },  // 2  – decision
-  { col:3, row:4 },  // 3  – intermed
-  { col:3, row:3 },  // 4  – decision
-  { col:4, row:3 },  // 5  – decision
-  { col:5, row:3 },  // 6  – decision
-  { col:6, row:3 },  // 7  – intermed
-  { col:6, row:2 },  // 8  – decision
-  { col:6, row:1 },  // 9  – decision
-  { col:5, row:1 },  // 10 – decision
-  { col:4, row:1 },  // 11 – decision
-  { col:4, row:0 },  // 12 – intermed
-  { col:3, row:0 },  // 13 – decision
-  { col:2, row:0 },  // 14 – decision
-  { col:1, row:0 },  // 15 – ARRIVEE
-];
-
-// ─── DECISIONS ────────────────────────────────────────────────────────────────
+  { col:1, row:5 },  // 0  , decision
+  { col:2, row:5 },  // 1  , intermed
+  { col:2, row:4 },  // 2  , decision
+  { col:3, row:4 },  // 3  , intermed
+  { col:3, row:3 },  // 4  , decision
+  { col:4, row:3 },  // 5  , decision
+  { col:5, row:3 },  // 6  , decision
+  { col:6, row:3 },  // 7  , intermed
+  { col:6, row:2 },  // 8  , decision
+  { col:6, row:1 },  // 9  , decision
+  { col:5, row:1 },  // 10 , decision
+  { col:4, row:1 },  // 11 , decision
+  { col:4, row:0 },  // 12 , intermed
+  { col:3, row:0 },  // 13 , decision
+  { col:2, row:0 },  // 14 , decision
+  { col:1, row:0 },  // 15 , ARRIVEE
+];// ─── DECISIONS ────────────────────────────────────────────────────────────────
 const DECISIONS = [
+
+  // ── CASE 0 , Administrateur territorial ───────────────────────────────────
   {
     stepIdx: 0,
     id: 'inet', name: "L'INET", lieu: "1 rue Edmond Michelet",
-    color: '#B488BC', module: 'Parcours INET — Formation initiale',
-    situation: "Tu visites l'INET, la grande école publique de Strasbourg qui forme les futurs directeurs et directrices des grandes collectivités (villes, départements, régions…). Un élève te montre son planning : des cours à Strasbourg, des stages dans une ville, un département, une région et une métropole — tous différents.",
-    question: "Pourquoi faire des stages dans plusieurs types de collectivités plutôt qu'une seule ?",
+    color: '#68C0B5', module: 'Formation initiale, Cycle Administrateur territorial',
+    formation: { illu: '../illu1.svg', label: 'Administrateur territorial' },
+    situation: "Tu visites l'INET à Strasbourg. Un élève te dit : 'En 18 mois, j'ai bossé dans une mairie, un département, une région et une métropole.' Tu te demandes : c'est quoi la différence entre tout ça ?",
+    question: "Qui s'occupe des collèges en France ?",
     choices: [
-      "Pour avoir plus de chances de trouver un poste après la formation",
-      "Parce que chaque collectivité a des missions très différentes — une ville gère les écoles primaires, un département les collèges et l'aide sociale, une région les lycées et les trains",
-      "Parce que l'INET n'a pas assez de place pour tout le monde à Strasbourg",
-      "C'est juste une tradition sans vraie raison"
+      "La mairie",
+      "Le département",
+      "La région",
+      "L'État uniquement"
     ],
     correct: 1,
-    feedback: "Une ville, un département et une région ne font pas du tout les mêmes choses. Un futur directeur général doit comprendre comment chacun fonctionne. C'est pourquoi la formation de 18 mois à l'INET alterne cours et stages dans des collectivités variées. Et toi ? Si tu veux un jour diriger une grande collectivité, c'est le parcours à viser : bac → licence/master → concours → INET.",
+    feedback: "La mairie gère les écoles primaires, le département les collèges, la région les lycées. Trois institutions différentes, avec des budgets et des équipes différentes. Un futur directeur général doit connaître tout ça , c'est pourquoi l'INET envoie ses élèves dans les quatre types de collectivités pendant leur formation.",
     penalty: null,
   },
+
+  // ── CASE 1 , Conservateur de bibliothèques ────────────────────────────────
+  {
+    stepIdx: 1,
+    id: 'mediatheque', name: "Médiathèque André Malraux", lieu: "Presqu'île Malraux",
+    color: '#ED6971', module: 'Lecture publique, Cycle Conservateurs de bibliothèques',
+    formation: { illu: '../illu3.svg', label: 'Conservateur de bibliothèques' },
+    situation: "Tu es en visite à la médiathèque André Malraux , la plus grande d'Alsace. La directrice te montre une salle pleine de gens qui font de l'impression 3D, du montage vidéo, des podcasts... Tu lui demandes : 'Mais c'est encore une bibliothèque ici ?'",
+    question: "Pourquoi les médiathèques proposent-elles autant d'activités au-delà des livres ?",
+    choices: [
+      "Parce que les livres ne se vendent plus et qu'il faut trouver autre chose",
+      "Pour attirer des publics qui ne seraient jamais venus autrement, et faire de la bibliothèque un lieu de vie pour tous",
+      "Parce que c'est imposé par une loi nationale depuis 2015",
+      "Pour concurrencer les salles de coworking privées"
+    ],
+    correct: 1,
+    feedback: "Une médiathèque qui n'est qu'une salle de livres silencieuse, c'est fini. Aujourd'hui, ce sont des lieux ouverts à tous, gratuits, où on peut apprendre, créer, se retrouver. Le conservateur de bibliothèques formé à l'INET pilote ces transformations , un des métiers publics qui évolue le plus vite.",
+    penalty: { type: 'reculer', cases: 1, label: "Mauvaise réponse : reculer d'1 case !" },
+  },
+
+  // ── CASE 2 , Conservateur du patrimoine ──────────────────────────────────
   {
     stepIdx: 2,
     id: 'orangerie', name: "Parc de l'Orangerie", lieu: "Allée de la Robertsau",
-    color: '#68C0B5', module: 'Transition écologique — Cycle supérieur de la transition (INET)',
-    situation: "Tu es en stage au service urbanisme de l'Eurométropole. Un promoteur veut construire des logements sur un terrain verdoyant à côté du Parc de l'Orangerie. Pour compenser, il propose de planter des arbres dans un village du Bas-Rhin. Ton responsable te demande : 'Est-ce qu'on peut accepter ça ?'",
-    question: "Qu'est-ce que la loi impose avant d'accepter une compensation environnementale ?",
+    color: '#B488BC', module: 'Transition écologique, Cycle Conservateurs du patrimoine',
+    formation: { illu: '../illu2.svg', label: 'Conservateur du patrimoine' },
+    situation: "Tu te promènes dans le Parc de l'Orangerie. Un promoteur veut bétonner un terrain vert juste à côté pour construire des logements. Pour compenser, il propose de planter des arbres dans un village à 30 km. Ton responsable te demande ton avis.",
+    question: "Est-ce qu'on peut détruire de la nature ici si on replante ailleurs ?",
     choices: [
-      "Rien : planter des arbres ailleurs compense toujours la destruction de nature ici",
-      "Il faut d'abord avoir vraiment cherché à éviter la destruction, puis à la réduire — la compensation n'est qu'un dernier recours",
-      "Il suffit que le promoteur plante deux fois plus d'arbres qu'il n'en détruit",
-      "La décision appartient uniquement au maire, le service technique n'a pas à se prononcer"
+      "Oui, planter autant d'arbres ailleurs compense toujours",
+      "Non, la loi dit qu'on doit d'abord chercher à éviter la destruction avant de parler de compensation",
+      "Oui, du moment que le promoteur plante deux fois plus d'arbres",
+      "Ça dépend uniquement du maire"
     ],
     correct: 1,
-    feedback: "La loi impose une logique en 3 étapes : Éviter → Réduire → Compenser (la règle ERC). On ne peut pas sauter directement à la compensation si on n'a pas cherché d'abord à éviter le problème. C'est un réflexe clé dans les métiers de l'environnement et de l'urbanisme en collectivité. À l'INET, le Cycle supérieur de la transition prépare les cadres à piloter ces stratégies environnementales à l'échelle d'un territoire.",
+    feedback: "La règle s'appelle ERC : Éviter → Réduire → Compenser. On ne peut pas sauter directement à 'je plante ailleurs' sans avoir vraiment cherché à ne pas détruire. C'est un principe fondamental que les conservateurs du patrimoine appliquent tous les jours.",
     penalty: { type: 'reculer', cases: 2, label: 'Mauvaise réponse : reculer de 2 cases !' },
   },
+
+  // ── CASE 3 , Conservateur du patrimoine ──────────────────────────────────
+  {
+    stepIdx: 3,
+    id: 'musee_alsace', name: "Musée alsacien", lieu: "23 quai Saint-Nicolas",
+    color: '#B488BC', module: "Valorisation des collections, Cycle Conservateurs du patrimoine",
+    formation: { illu: '../illu2.svg', label: 'Conservateur du patrimoine' },
+    situation: "Tu visites les réserves du Musée alsacien : des milliers d'objets anciens jamais exposés faute de place. Une fondation propose de financer une expo itinérante pour les faire voyager dans les villages du Bas-Rhin. Le directeur hésite.",
+    question: "Quel est le premier réflexe d'un conservateur avant de prêter des objets de musée ?",
+    choices: [
+      "Accepter : plus les objets voyagent, plus le musée est connu",
+      "Refuser : les objets de musée ne doivent jamais quitter leur lieu de conservation",
+      "Vérifier que le transport et les conditions d'exposition ne risquent pas d'abîmer les objets",
+      "Demander l'autorisation du maire de Strasbourg"
+    ],
+    correct: 2,
+    feedback: "Prêter une œuvre, c'est engager la responsabilité du musée. Température, humidité, vibrations du transport, sécurité sur place , tout doit être vérifié. Valoriser le patrimoine oui, mais pas à n'importe quel prix.",
+    penalty: { type: 'passer', label: 'Mauvaise réponse : passer votre prochain tour !' },
+  },
+
+  // ── CASE 4 , Administrateur territorial ───────────────────────────────────
   {
     stepIdx: 4,
     id: 'mairie', name: "Mairie de Strasbourg", lieu: "Place Broglie",
-    color: '#E84250', module: 'Direction générale — Cycle de direction générale INET',
-    situation: "Tu es en stage à la mairie. Tu assistes à une scène tendue : la maire demande au DGS (le directeur général des services — le plus haut fonctionnaire de la ville) d'écrire un rapport critique sur un projet porté par l'opposition, pour s'en servir lors du conseil municipal.",
-    question: "Que doit faire le DGS ?",
+    color: '#68C0B5', module: 'Direction générale, Cycle Administrateur territorial',
+    formation: { illu: '../illu1.svg', label: 'Administrateur territorial' },
+    situation: "Tu assistes à une scène tendue à la mairie. La maire demande au directeur général des services (le plus haut fonctionnaire de la ville) d'écrire un rapport pour attaquer l'opposition avant le conseil municipal.",
+    question: "Qu'est-ce qu'un fonctionnaire doit faire dans cette situation ?",
     choices: [
-      "Écrire le rapport : la maire est son supérieur, il doit obéir",
-      "Refuser et proposer à la place un rapport factuel et équilibré sur le projet",
+      "Obéir : la maire est sa supérieure",
       "Démissionner pour ne pas être impliqué",
-      "Écrire le rapport mais prévenir l'élu d'opposition"
+      "Refuser et proposer un rapport factuel, équilibré, sans parti pris politique",
+      "Prévenir discrètement l'élu d'opposition"
     ],
-    correct: 1,
-    feedback: "Un fonctionnaire travaille pour l'institution et tous ses habitants — pas pour la majorité politique du moment. C'est une règle fondamentale : l'impartialité. Le DGS peut conseiller la maire, mais il ne peut pas produire un document partisan. Cette posture d'équilibre entre l'élu et le fonctionnaire, c'est exactement ce que prépare le Cycle de direction générale de l'INET.",
+    correct: 2,
+    feedback: "Un fonctionnaire travaille pour tous les habitants, pas pour la majorité politique du moment. C'est la règle d'impartialité. Il peut conseiller, mais pas produire un document partisan. Tenir cette ligne, c'est exactement ce que l'INET apprend à ses élèves.",
     penalty: { type: 'passer', label: 'Mauvaise réponse : passer votre prochain tour !' },
   },
+
+  // ── CASE 5 , Administrateur territorial ───────────────────────────────────
   {
     stepIdx: 5,
-    id: 'eurometropole', name: "Eurométropole", lieu: "1 parc de l'Étoile",
-    color: '#B488BC', module: 'Projet de territoire — Itinéraire Territoire INET',
-    situation: "Tu es en stage à l'Eurométropole. L'institution veut obtenir une subvention européenne pour améliorer les transports entre Strasbourg et Kehl (Allemagne). La subvention couvre 60 % du coût total sur 4 ans. L'Eurométropole doit financer les 40 % restants — mais la dépense s'étale sur 4 ans, pas en une seule fois.",
-    question: "Pourquoi est-ce un vrai problème d'inscrire toute la dépense dans le budget d'une seule année ?",
+    id: 'eurometropole', name: "Eurométropole de Strasbourg", lieu: "1 parc de l'Étoile",
+    color: '#68C0B5', module: 'Finances locales, Cycle Administrateur territorial',
+    formation: { illu: '../illu1.svg', label: 'Administrateur territorial' },
+    situation: "L'Eurométropole veut améliorer les transports avec l'Allemagne. L'Europe finance 60 % du projet. Il reste 40 % à payer sur 4 ans. Un collègue propose d'inscrire toute la dépense dans le budget de cette année pour simplifier.",
+    question: "Pourquoi c'est une mauvaise idée ?",
     choices: [
-      "Ce n'est pas un problème, on peut toujours ajuster le budget en cours d'année",
-      "Parce que les collectivités doivent avoir un budget équilibré chaque année — une grosse dépense d'un coup peut tout faire basculer",
-      "Parce que les subventions européennes arrivent toujours en avance sur les dépenses",
-      "Parce que la loi interdit les projets transfrontaliers de plus de 3 ans"
+      "Ce n'est pas une mauvaise idée, on peut ajuster le budget en cours d'année",
+      "Parce que les collectivités doivent avoir un budget équilibré chaque année , une grosse dépense d'un coup peut tout faire basculer",
+      "Parce que l'Europe interdit les budgets annuels pour les projets transfrontaliers",
+      "Parce que la loi limite les dépenses à 10 % du budget annuel"
     ],
     correct: 1,
-    feedback: "Contrairement à l'État, une collectivité ne peut pas voter un budget en déficit. Pour les grands projets sur plusieurs années, il existe des outils spéciaux pour lisser les dépenses dans le temps. Strasbourg est une des rares villes françaises à monter régulièrement des projets avec l'Allemagne — une spécificité que les cadres formés à l'INET exploitent. L'Itinéraire Territoire de l'INET forme justement à ces stratégies de développement territorial.",
+    feedback: "Une ville ou une métropole ne peut pas voter un budget en déficit , contrairement à l'État. Pour les grands projets, il existe des outils pour lisser les dépenses dans le temps. Maîtriser ces règles, c'est une compétence clé des administrateurs territoriaux formés à l'INET.",
     penalty: null,
   },
+
+  // ── CASE 6 , Administrateur territorial ───────────────────────────────────
   {
     stepIdx: 6,
     id: 'prefecture', name: "Préfecture du Bas-Rhin", lieu: "5 place de la République",
-    color: '#ED6971', module: 'Institutions — Cycle INET Stratégies publiques et management',
-    situation: "Tu visites la préfecture du Bas-Rhin. Le préfet explique qu'il vient de contester une décision du maire de Strasbourg devant le tribunal administratif. Un de tes camarades demande : 'Mais c'est pas le maire qui décide dans sa ville ? Le préfet peut vraiment s'y opposer ?'",
+    color: '#68C0B5', module: 'Droit public & institutions, Cycle Administrateur territorial',
+    formation: { illu: '../illu1.svg', label: 'Administrateur territorial' },
+    situation: "Tu visites la préfecture. Le préfet vient de contester une décision du maire de Strasbourg devant le tribunal administratif. Un ami te dit : 'Mais le maire, c'est lui qui décide dans sa ville, non ?'",
     question: "Pourquoi le préfet peut-il contester une décision du maire ?",
     choices: [
-      "Il ne peut pas — le maire est totalement souverain dans sa commune",
-      "La Constitution donne au préfet le rôle de vérifier que les décisions locales respectent bien la loi nationale",
+      "Il ne peut pas, le maire est totalement souverain dans sa commune",
+      "La Constitution lui confie le rôle de vérifier que les décisions locales respectent bien la loi",
       "Le préfet est le supérieur hiérarchique du maire et peut lui donner des ordres",
-      "C'est un règlement européen qui l'autorise à intervenir"
+      "C'est un règlement européen qui l'y autorise"
     ],
     correct: 1,
-    feedback: "Depuis 1982, les maires décident librement — mais leurs décisions doivent respecter la loi. C'est l'article 72 de la Constitution qui confie au préfet un rôle de 'contrôle de légalité'. Le préfet ne peut plus bloquer une décision avant qu'elle soit prise (fin de la tutelle préfectorale), mais il peut la contester après. Comprendre cet équilibre État–collectivités est une compétence de base pour tous les futurs cadres territoriaux formés à l'INET.",
+    feedback: "Depuis 1982, les maires décident librement , mais leurs décisions doivent respecter la loi. Le préfet ne peut plus les bloquer avant, mais peut les contester après. C'est ça, la décentralisation : liberté locale + contrôle de légalité.",
     penalty: { type: 'reculer', cases: 1, label: "Mauvaise réponse : reculer d'1 case !" },
   },
+
+  // ── CASE 7 , Conservateur du patrimoine ──────────────────────────────────
+  {
+    stepIdx: 7,
+    id: 'neustadt', name: "Quartier Neustadt", lieu: "Avenue de la Liberté",
+    color: '#B488BC', module: "Patrimoine UNESCO, Cycle Conservateurs du patrimoine",
+    formation: { illu: '../illu2.svg', label: 'Conservateur du patrimoine' },
+    situation: "Tu te balades dans la Neustadt, classée UNESCO depuis 2017. Un promoteur veut remplacer les vieilles fenêtres d'un immeuble haussmannien par du double vitrage moderne pour isoler le bâtiment. Ton responsable te demande ton avis.",
+    question: "Un classement UNESCO, ça interdit toute rénovation ?",
+    choices: [
+      "Oui, aucun travaux n'est possible dans un quartier classé UNESCO",
+      "Non, mais les travaux doivent respecter l'aspect d'origine , il existe des solutions qui combinent isolation et style historique",
+      "Non, l'isolation thermique est prioritaire sur tout le reste",
+      "Ça dépend uniquement du préfet"
+    ],
+    correct: 1,
+    feedback: "Un classement UNESCO n'interdit pas de rénover , il exige que l'authenticité du site soit préservée. Des doubles vitrages à profil historique existent, et l'Architecte des Bâtiments de France valide tous les travaux en secteur protégé. Patrimoine et écologie ne sont pas incompatibles.",
+    penalty: { type: 'reculer', cases: 1, label: "Mauvaise réponse : reculer d'1 case !" },
+  },
+
+  // ── CASE 8 , Administrateur territorial ───────────────────────────────────
   {
     stepIdx: 8,
     id: 'conseil_dep', name: "Collectivité européenne d'Alsace", lieu: "Place du Quartier Blanc",
-    color: '#8D59A0', module: 'Finances publiques — Cycle supérieur de management INET (CSM)',
-    situation: "Tu es en stage à la Collectivité européenne d'Alsace. Le président veut construire un grand stade à 80 millions d'euros en empruntant toute la somme sur 30 ans. Ton responsable finances te dit : 'Il faut vérifier si on peut se le permettre sans mettre la collectivité en danger.' Il te demande par quoi commencer.",
+    color: '#68C0B5', module: 'Finances publiques, Cycle Administrateur territorial',
+    formation: { illu: '../illu1.svg', label: 'Administrateur territorial' },
+    situation: "Le président de la Collectivité européenne d'Alsace veut construire un grand stade à 80 millions d'euros, en empruntant toute la somme sur 30 ans. Ton responsable te demande : 'On peut se le permettre ?'",
     question: "Comment savoir si une collectivité peut vraiment se permettre un gros emprunt ?",
     choices: [
-      "Regarder combien il y a sur le compte bancaire de la collectivité aujourd'hui",
-      "Calculer en combien d'années la collectivité rembourserait toute sa dette avec ses économies annuelles — si c'est plus de 12 ans, c'est risqué",
+      "Regarder combien il y a sur le compte bancaire aujourd'hui",
+      "Calculer combien d'années il faudrait pour rembourser toute la dette avec les économies annuelles , au-delà de 12 ans, c'est risqué",
       "Vérifier que l'emprunt ne dépasse pas 10 % du budget annuel",
-      "Obtenir l'autorisation du préfet avant tout emprunt"
+      "Obtenir l'autorisation du préfet"
     ],
     correct: 1,
-    feedback: "On appelle ça la 'capacité de désendettement'. Si une collectivité met de côté 10 M€ par an et a 80 M€ de dettes, il lui faudrait 8 ans pour tout rembourser. Au-delà de 12 ans, les finances sont considérées fragiles. Ce type de raisonnement est enseigné dans le Cycle supérieur de management (CSM) de l'INET — une formation diplômante qui donne accès à un Master 2 en Management Public Territorial.",
+    feedback: "Si la collectivité met de côté 10 M€ par an et a 80 M€ de dettes, il lui faut 8 ans , c'est raisonnable. Au-delà de 12 ans, les finances deviennent fragiles. On appelle ça la 'capacité de désendettement'. Savoir lire un budget, c'est une des premières choses qu'on apprend à l'INET.",
     penalty: null,
   },
+
+  // ── CASE 9 , Conservateur de bibliothèques ────────────────────────────────
   {
     stepIdx: 9,
-    id: 'tram', name: "CTS — Place de l'Homme de Fer", lieu: "Place de l'Homme de Fer",
-    color: '#4ecdc4', module: 'Numérique & IA — formations INET (IAESI / TRNUM)',
-    situation: "Tu es en stage au service numérique de l'Eurométropole. La CTS (le réseau tram et bus de Strasbourg) veut lancer une appli qui analyse les trajets de 300 000 abonnés en temps réel pour proposer des tarifs personnalisés. Ton responsable te demande : 'Qu'est-ce qu'on doit faire avant de lancer ça par rapport à la protection des données ?'",
-    question: "Que faut-il faire obligatoirement avant de collecter les données de déplacement de centaines de milliers de personnes ?",
+    id: 'tram', name: "CTS, Place de l'Homme de Fer", lieu: "Place de l'Homme de Fer",
+    color: '#ED6971', module: 'Numérique & médiation, Cycle Conservateurs de bibliothèques',
+    formation: { illu: '../illu3.svg', label: 'Conservateur de bibliothèques' },
+    situation: "La bibliothèque veut lancer une appli qui analyse les emprunts de 120 000 abonnés pour leur recommander des livres , un peu comme Spotify, mais pour la lecture. Ta responsable te demande : 'Qu'est-ce qu'on doit vérifier avant de lancer ça ?'",
+    question: "Avant d'analyser les habitudes de lecture de 120 000 personnes, que faut-il faire ?",
     choices: [
-      "Rien : les données de transports en commun ne sont pas des données personnelles",
-      "Juste ajouter une phrase dans les conditions générales de l'appli",
-      "Réaliser une étude d'impact sur la vie privée, et si les risques restent trop élevés, consulter la CNIL (la 'police des données') avant le lancement",
-      "Obtenir l'accord des syndicats de la CTS"
+      "Rien, les données de bibliothèque ne sont pas sensibles",
+      "Juste ajouter une ligne dans les conditions générales d'utilisation",
+      "Réaliser une étude d'impact sur la vie privée, et si les risques restent élevés, consulter la CNIL",
+      "Obtenir l'accord des syndicats des bibliothécaires"
     ],
     correct: 2,
-    feedback: "Le RGPD — le règlement européen qui protège tes données — impose une 'étude d'impact' quand on collecte des données sensibles à grande échelle, comme les trajets quotidiens de milliers de personnes. Si les risques restent élevés, la CNIL doit être consultée avant le lancement. Ces enjeux numériques et éthiques font partie des formations INET sur l'IA et le numérique (stages IAESI et TRNUM) — des compétences très recherchées dans les collectivités.",
+    feedback: "Les habitudes de lecture peuvent révéler des opinions politiques ou religieuses , ce sont des données sensibles. Le RGPD impose une Analyse d'Impact avant tout traitement à grande échelle. Si les risques restent élevés, la CNIL doit valider. Les conservateurs de bibliothèques de l'INET pilotent ces projets numériques dans le respect du droit des usagers.",
     penalty: { type: 'passer', label: 'Mauvaise réponse : passer votre prochain tour !' },
   },
+
+  // ── CASE 10 , Administrateur territorial ──────────────────────────────────
   {
     stepIdx: 10,
     id: 'cathedrale', name: "Cathédrale Notre-Dame", lieu: "Place de la Cathédrale",
-    color: '#00A499', module: 'Droit local — Cycle INET Stratégies publiques et management',
-    situation: "Tu es en stage à la mairie de Strasbourg. Une association demande l'autorisation d'installer une crèche de Noël dans le hall de l'Hôtel de Ville. Ton responsable te dit : 'En Alsace, on a un droit local spécial hérité de l'histoire, différent du reste de la France — mais ça ne veut pas dire qu'on peut tout faire.'",
-    question: "Comment la mairie doit-elle traiter cette demande ?",
+    color: '#68C0B5', module: 'Droit local alsacien-mosellan, Cycle Administrateur territorial',
+    formation: { illu: '../illu1.svg', label: 'Administrateur territorial' },
+    situation: "Une association demande à la mairie de Strasbourg d'installer une crèche de Noël dans le hall de l'Hôtel de Ville. Un ami te dit : 'En France c'est laïque, ils peuvent jamais accepter ça !' Mais ton responsable sourit : 'En Alsace, c'est un peu différent...'",
+    question: "Pourquoi les règles sur la laïcité sont-elles différentes en Alsace ?",
     choices: [
-      "Refuser : une mairie est un bâtiment public, aucun signe religieux n'est toléré nulle part en France",
-      "Autoriser sans condition : en Alsace, le droit local autorise tout ce qui touche à la religion",
-      "Analyser : si la crèche a un caractère culturel et festif, elle peut être autorisée ; si elle est purement religieuse, c'est plus délicat",
-      "Renvoyer la décision au préfet, seul compétent sur les questions religieuses"
+      "Ce n'est pas différent, la laïcité s'applique partout en France de la même façon",
+      "Parce que l'Alsace a un statut juridique particulier hérité de l'époque où elle était allemande, avec des règles propres sur la religion",
+      "Parce que le maire de Strasbourg a un pouvoir spécial sur les questions religieuses",
+      "C'est une tradition locale tolérée mais sans base légale"
     ],
-    correct: 2,
-    feedback: "L'Alsace-Moselle a un statut juridique particulier depuis l'époque allemande : les règles sur la laïcité y sont différentes. Mais même ici, les tribunaux ont précisé qu'une crèche dans un bâtiment public pose moins de problème si elle a un caractère culturel ou festif. Ces nuances juridiques locales font partie des réalités que les cadres territoriaux doivent maîtriser — c'est au programme du Cycle INET Stratégies publiques et management.",
+    correct: 1,
+    feedback: "L'Alsace-Moselle applique un droit local datant d'avant 1905 , quand la région était allemande et n'a pas connu la loi de séparation Église-État. Résultat : des règles différentes sur la religion, les jours fériés, les associations... Un droit unique en France que tout cadre territorial à Strasbourg doit connaître.",
     penalty: null,
   },
+
+  // ── CASE 11 , Administrateur territorial ──────────────────────────────────
   {
     stepIdx: 11,
     id: 'hopital', name: "Hôpitaux Universitaires de Strasbourg", lieu: "1 place de l'Hôpital",
-    color: '#ED6971', module: "Santé & action locale — Stage INET 'La santé en collectivité' (1SFCT)",
-    situation: "Tu es en stage à l'Eurométropole. Les urgences des HUS (les Hôpitaux Universitaires de Strasbourg) débordent. On te demande : 'La métropole peut-elle aider à organiser des médecins de ville qui travailleraient le soir et le week-end pour éviter que tout le monde aille aux urgences ?'",
-    question: "Quel est le vrai rôle d'une métropole face à un problème de santé publique ?",
+    color: '#68C0B5', module: "Santé & action locale, Cycle Administrateur territorial",
+    formation: { illu: '../illu1.svg', label: 'Administrateur territorial' },
+    situation: "Les urgences des hôpitaux de Strasbourg débordent. Un élu de l'Eurométropole veut agir. Mais un conseiller lui dit : 'La santé c'est pas notre compétence, on peut rien faire.' L'élu te demande si c'est vrai.",
+    question: "Une métropole peut-elle agir sur un problème de santé publique ?",
     choices: [
-      "La métropole est responsable de la santé sur son territoire et peut imposer des solutions aux médecins libéraux",
-      "La métropole n'a pas de compétence légale en santé, mais elle peut coordonner les acteurs et signer des accords avec l'Agence Régionale de Santé (ARS)",
-      "La santé, c'est uniquement le rôle de la Région depuis 2015",
-      "Seul l'État peut agir sur les urgences hospitalières, la métropole ne peut rien faire"
-    ],
-    correct: 1,
-    feedback: "La santé n'est pas officiellement une compétence des métropoles — c'est l'État via les Agences Régionales de Santé (ARS) qui pilote. Mais les collectivités peuvent jouer un rôle de coordinateur en signant des 'Contrats Locaux de Santé'. C'est toute la subtilité des politiques publiques : agir concrètement sans en avoir le titre officiel. L'INET a une formation dédiée à la santé comme levier d'action locale (stage 1SFCT).",
-    penalty: { type: 'reculer', cases: 2, label: 'Mauvaise réponse : reculer de 2 cases !' },
-  },
-  {
-    stepIdx: 13,
-    id: 'rh', name: "Direction des Ressources Humaines", lieu: "Hôtel de Ville, 2e étage",
-    color: '#8D59A0', module: 'Management RH — Cycle supérieur des DRH INET',
-    situation: "Tu es en stage à la DRH de l'Eurométropole (6 500 agents). Un chef de service est absent depuis 9 mois pour maladie. Son équipe de 40 personnes est épuisée et démotivée. Un syndicat signale que ce chef avait un comportement difficile avant son arrêt. Ton responsable RH te demande : 'Par où on commence ?'",
-    question: "Quelle est la bonne priorité pour la DRH ?",
-    choices: [
-      "Attendre le retour du chef de service, puis déclencher une procédure disciplinaire",
-      "Nommer immédiatement un remplaçant permanent sans enquête",
-      "Mettre quelqu'un pour gérer l'équipe, lancer une enquête sur ce qui s'est passé, et préparer un retour accompagné du chef de service",
-      "Répartir les 40 agents dans d'autres services pour effacer le problème"
+      "Non, la santé appartient uniquement à l'État, la métropole ne peut rien faire",
+      "Oui, la métropole est responsable de la santé et peut imposer des solutions aux médecins",
+      "Oui, même sans compétence officielle, elle peut coordonner les acteurs et signer des accords avec l'Agence Régionale de Santé",
+      "Non, c'est uniquement le rôle de la Région depuis 2015"
     ],
     correct: 2,
-    feedback: "Quand une équipe souffre à cause du management, la collectivité a une obligation légale d'agir — on appelle ça les 'risques psychosociaux' (RPS). Il faut assurer la continuité du service, comprendre les causes et ne pas précipiter le retour sans accompagnement. Le Cycle supérieur des DRH de l'INET prépare les directeurs RH des grandes collectivités à gérer exactement ce type de situation complexe.",
+    feedback: "La santé n'est pas une compétence officielle des métropoles , mais ça ne les empêche pas d'agir. En signant des Contrats Locaux de Santé avec l'ARS, une métropole peut financer des maisons de santé, coordonner des médecins de ville. Agir concrètement sans en avoir le titre officiel, c'est tout l'art du cadre territorial.",
+    penalty: { type: 'reculer', cases: 2, label: 'Mauvaise réponse : reculer de 2 cases !' },
+  },
+
+  // ── CASE 12 , Conservateur de bibliothèques ───────────────────────────────
+  {
+    stepIdx: 12,
+    id: 'robertsau', name: "Bibliothèque de la Robertsau", lieu: "Rue Boecklin",
+    color: '#ED6971', module: "Réseau de lecture publique, Cycle Conservateurs de bibliothèques",
+    formation: { illu: '../illu3.svg', label: 'Conservateur de bibliothèques' },
+    situation: "La bibliothèque de la Robertsau a testé une nouveauté : ouvrir le soir sans personnel, accès par badge. Résultat : 3 fois plus de visites. Mais les bibliothécaires s'y opposent : 'Sans agent, on ne garantit rien.' Ton responsable te demande comment trancher.",
+    question: "Que fait un bon manager face à une innovation qui marche mais divise les équipes ?",
+    choices: [
+      "Imposer : les chiffres parlent d'eux-mêmes",
+      "Abandonner : sans accord syndical, rien n'est possible",
+      "Conduire une expérimentation encadrée avec les équipes, évaluer ensemble, puis décider",
+      "Externaliser l'accueil du soir à une entreprise privée"
+    ],
+    correct: 2,
+    feedback: "Imposer sans concerter crée des conflits. Renoncer sans explorer prive les usagers d'un service. Tester, évaluer, décider ensemble : c'est la méthode que les conservateurs de bibliothèques de l'INET apprennent à appliquer face aux transformations.",
     penalty: null,
   },
+
+  // ── CASE 13 , Conservateur du patrimoine ─────────────────────────────────
+  {
+    stepIdx: 13,
+    id: 'musees_strasbourg', name: "Musées de Strasbourg", lieu: "Palais Rohan, 2 place du Château",
+    color: '#B488BC', module: "Politique culturelle, Cycle Conservateurs du patrimoine",
+    formation: { illu: '../illu2.svg', label: 'Conservateur du patrimoine' },
+    situation: "Le budget des Musées de Strasbourg a baissé de 12 % en 3 ans. Le directeur doit choisir quelles œuvres acheter en priorité cette année. Il te demande : 'Sur quelle base tu déciderais, toi ?'",
+    question: "Qu'est-ce qui guide un conservateur quand il choisit d'acheter une œuvre ?",
+    choices: [
+      "Ce qui plaît le plus au grand public pour remplir le musée",
+      "Ce qui a la valeur marchande la plus élevée",
+      "Ce qui complète les collections existantes, correspond à la politique validée par les élus, et dont la provenance légale est vérifiée",
+      "Uniquement les dons et legs, pour ne pas dépenser d'argent public"
+    ],
+    correct: 2,
+    feedback: "Acheter une œuvre pour un musée, ce n'est pas du shopping , ça engage la ville pour des générations. La provenance doit être irréprochable (pas de biens spoliés), et l'achat doit s'inscrire dans une stratégie validée par les élus. Ces arbitrages complexes, c'est le quotidien du conservateur du patrimoine.",
+    penalty: null,
+  },
+
+  // ── CASE 14 , Conservateur de bibliothèques ───────────────────────────────
   {
     stepIdx: 14,
     id: 'petite_france', name: "La Petite France", lieu: "Quai de la Bruche",
-    color: '#00A499', module: "Habitat & territoire — Cycle supérieur de la transition INET",
-    situation: "Tu te promènes dans la Petite France avec ton maître de stage. Il te montre des appartements transformés en Airbnb : 'Ce quartier classé UNESCO perd ses habitants. Les propriétaires louent aux touristes — c'est bien plus rentable. Mais les habitants permanents partent.' Il te demande : 'Tu crois qu'on peut faire quelque chose légalement ?'",
-    question: "Quel outil permet à la ville de limiter la multiplication des locations touristiques type Airbnb ?",
+    color: '#ED6971', module: "Action culturelle, Cycle Conservateurs de bibliothèques",
+    formation: { illu: '../illu3.svg', label: 'Conservateur de bibliothèques' },
+    situation: "Les habitants des quartiers prioritaires de Strasbourg représentent 18 % de la population, mais seulement 4 % des inscrits à la bibliothèque. Ta responsable te demande : 'Comment on fait venir des gens qui ne sont jamais entrés dans une bibliothèque de leur vie ?'",
+    question: "Quelle est la stratégie la plus efficace pour toucher ces publics ?",
     choices: [
-      "Un arrêté municipal qui interdit purement et simplement tous les Airbnb dans le quartier",
-      "Une loi (ELAN, 2018) qui oblige les propriétaires à créer un vrai logement ailleurs s'ils transforment le leur en meublé touristique",
-      "Uniquement une taxe supplémentaire sur les résidences secondaires",
-      "Un vote des habitants pour fixer un quota d'Airbnb autorisés dans le quartier"
+      "Baisser le prix de l'abonnement",
+      "Faire de grandes campagnes d'affichage dans les quartiers",
+      "Aller dans les lieux de vie de ces publics et construire des services avec eux, plutôt qu'attendre qu'ils viennent",
+      "Ouvrir une nouvelle bibliothèque dans le quartier"
     ],
-    correct: 1,
-    feedback: "La loi ELAN (2018) donne aux grandes villes un outil concret : si tu transforms un appartement en Airbnb, tu dois en créer un autre à usage résidentiel en compensation. Ça évite que les centres-villes se vident de leurs habitants. Ce type d'enjeu — entre logement, tourisme et transitions sociales — est au programme du Cycle supérieur de la transition de l'INET. Des décisions concrètes qui changent la vie d'un quartier.",
+    correct: 2,
+    feedback: "Le vrai frein, ce n'est pas le prix ni la distance , c'est souvent le sentiment que 'ce lieu n'est pas fait pour moi'. La solution : aller vers ces publics dans leurs lieux (centres sociaux, marchés, écoles) et co-construire des services avec eux. C'est ce qu'on appelle la stratégie 'aller vers'.",
     penalty: { type: 'reculer', cases: 1, label: "Mauvaise réponse : reculer d'1 case !" },
   },
 ];
