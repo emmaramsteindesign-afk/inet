@@ -687,3 +687,67 @@ nav-inet-label {
   align-items: baseline;
   white-space: nowrap;
 }
+
+/* ─── MOBILE ────────────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+
+  /* Navbar : masquer le label INET et les stats secondaires */
+  .nav-inet-label { display: none; }
+  .nav-stats {
+    gap: 4px;
+    padding: 5px 10px;
+    font-size: 10px;
+  }
+  .nav-stat-item { gap: 3px; font-size: 10px; }
+  .nav-stat-item strong { font-size: 11px; }
+  .nav-divider { margin: 0 2px; }
+  .nav-help-btn span:not(svg) { display: none; } /* icône seule */
+  .nav-help-btn { padding: 7px 10px; gap: 0; }
+
+  /* Panel : drawer du bas pleine largeur */
+  #panel {
+    right: 0;
+    left: 0;
+    top: auto;
+    bottom: -100%;
+    width: 100%;
+    max-height: 80vh;
+    transform: none;
+    border-radius: 16px 16px 0 0;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    padding: 20px 16px 24px;
+    transition: bottom .4s cubic-bezier(.34,1.2,.64,1);
+  }
+  #panel.open {
+    right: 0;
+    bottom: 0;
+  }
+
+  /* Poignée visuelle en haut du drawer */
+  #panel::before {
+    content: '';
+    display: block;
+    width: 36px;
+    height: 4px;
+    background: rgba(255,255,255,.2);
+    border-radius: 2px;
+    margin: 0 auto 16px;
+  }
+
+  /* Bouton dé : remonter pour ne pas se faire écraser */
+  #dice-btn { bottom: 16px; padding: 12px 28px; font-size: 12px; }
+  #toast { bottom: 68px; font-size: 10px; }
+  #dice-display { bottom: 70px; }
+
+  /* Choix : taille de texte confortable */
+  .choice-btn { font-size: 13px; padding: 12px 14px; }
+  .panel-title { font-size: 17px; }
+  .panel-situation { font-size: 12px; }
+  .panel-question { font-size: 13px; }
+
+  /* Footer boutons côte à côte */
+  .panel-footer { gap: 8px; }
+  .btn-close, .btn-next { font-size: 12px; padding: 12px 8px; }
+}

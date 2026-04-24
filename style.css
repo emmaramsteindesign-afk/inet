@@ -35,7 +35,7 @@ img, svg {
 ========================= */
 
 body {
-  font-family: 'TT Commons Pro', sans-serif;
+  font-family: 'tt-commons-pro', sans-serif;
   background: var(--white);
   color: var(--black);
   line-height: 1.4;
@@ -46,7 +46,7 @@ body {
 ========================= */
 
 h1, h2, h3, h4, h5 {
-  font-family: 'TT Commons Pro', sans-serif;
+  font-family: 'tt-commons-pro', sans-serif;
   color: var(--black);
 }
 
@@ -1005,7 +1005,7 @@ h5, .date-title {
    .nav-inet-label {
             display: inline-flex;
             align-items: baseline;
-            font-family: 'TT Commons Pro', sans-serif;
+            font-family: 'tt-commons-pro', sans-serif;
             font-weight: 700;
             font-size: 1.1rem;
             color: var(--red);
@@ -1354,7 +1354,7 @@ h5, .date-title {
         ===================== */
         .tilt-tag {
             display: inline-block;
-            font-family: 'TT Commons Pro', sans-serif;
+            font-family: 'tt-commons-pro', sans-serif;
             font-weight: 600;
             padding: 5px 14px;
             line-height: 1.4;
@@ -1714,7 +1714,7 @@ h5, .date-title {
   padding: var(--btn-pad-v) var(--btn-pad-h) !important;
   font-size: var(--btn-font) !important;
   font-weight: var(--btn-weight) !important;
-  font-family: 'TT Commons Pro', sans-serif !important;
+  font-family: 'tt-commons-pro', sans-serif !important;
   border-radius: 0 !important;
   display: inline-block !important;
   text-align: center !important;
@@ -1773,6 +1773,34 @@ h5, .date-title {
 .faq-section {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
+}
+
+/* =========================
+   FAQ — padding interne boutons et réponses
+========================= */
+
+.faq-section .accordion-button {
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+}
+
+.faq-section .accordion-body {
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+}
+
+/* Empêche la colonne FAQ de déborder de son conteneur sur mobile */
+@media (max-width: 767px) {
+  .faq-section {
+    max-width: 100% !important;
+    overflow: hidden !important;
+  }
+
+  /* Bootstrap row avec gutter négatif déborde — on le contient */
+  .section-pink .row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
 }
 
 /* -- Gouttière entre témoignages et FAQ -- */
